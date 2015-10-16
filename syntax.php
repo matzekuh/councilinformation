@@ -16,7 +16,7 @@
      * All DokuWiki plugins to extend the parser/rendering mechanism
      * need to inherit from this class
      */
-    class syntax_plugin_councilinfomation extends DokuWiki_Syntax_Plugin {
+    class syntax_plugin_test extends DokuWiki_Syntax_Plugin {
      
      
      
@@ -57,9 +57,9 @@
         * @public
         * @static
         */
-        function getPType(){
-            return 'block';
-        }
+    //    function getPType(){
+    //        return 'normal';
+    //    }
      
        /**
         * Where to sort in?
@@ -83,13 +83,13 @@
         * @see render()
         */
         function connectTo($mode) {
-    //      $this->Lexer->addSpecialPattern('<council>.+?</council>',$mode,'plugin_councilinformation');
-          $this->Lexer->addEntryPattern('<council>',$mode,'plugin_councilinformation');
+          $this->Lexer->addSpecialPattern('<TEST>',$mode,'plugin_test');
+    //      $this->Lexer->addEntryPattern('<TEST>',$mode,'plugin_test');
         }
      
-        function postConnect() {
-          $this->Lexer->addExitPattern('</council>','plugin_councilinformation');
-        }
+    //    function postConnect() {
+    //      $this->Lexer->addExitPattern('</TEST>','plugin_test');
+    //    }
      
      
        /**
@@ -122,7 +122,7 @@
         * @static
         */
         function handle($match, $state, $pos, &$handler){
-        /**    switch ($state) {
+            switch ($state) {
               case DOKU_LEXER_ENTER : 
                 break;
               case DOKU_LEXER_MATCHED :
@@ -133,43 +133,8 @@
                 break;
               case DOKU_LEXER_SPECIAL :
                 break;
-            } */
-            
-            $paramString = substr($match,9,-10);
-            
-            $params = array(
-                'name'      => 'N.N.',
-                'adress'    => 'N.N.',
-                'country'   => 'N.N.',
-                'phone'     => 'N.N.',
-                'email'     => 'N.N.'
-            );
-            
-            //----- parse parameteres into name="value" pairs  
-            preg_match_all("/(\w+?)=\"(.*?)\"/", $parameterStr, $regexMatches, PREG_SET_ORDER);
-            
-            for ($i = 0; $i < count($regexMatches); $i++) {
-                $name  = strtoupper($regexMatches[$i][1]);
-                $value = $regexMatches[$i][2];
-                
-                if(strcmp($name, "NAME")==0){
-                    $params['title'] = hsc(trim($value));
-                } else
-                if(strcmp($name, "ADRESS")==0){
-                    $params['adress'] = hsc(trim($value));
-                } else
-                if(strcmp($name, "COUNTRY")==0){
-                    $params['country'] = hsc(trim($value));
-                } else
-                if(strcmp($name, "PHONE")==0){
-                    $params['phone'] = hsc(trim($value));
-                } else
-                if(strcmp($name, "EMAIL")==0){
-                    $params['email'] = hsc(trim($value));
-                }
             }
-            
-            return $params;
+            return array();
         }
      
        /**
@@ -193,28 +158,7 @@
         */
         function render($mode, &$renderer, $data) {
             if($mode == 'xhtml'){
-                $table = "<table>
-                        <thead>
-                            <tr class='row0'>
-                                <th class='col0'> Name </th>
-                                <th class='col1'> Address </th>
-                                <th class='col2'> Country </th>
-                                <th class='col3'> Phone number </th>
-                                <th class='col4'> Email address </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr class='row1'>
-                                <th class='col0'> ".$data['name']." </th>
-                                <th class='col1'> ".$data['adress']." </th>
-                                <th class='col2'> ".$data['country']." </th>
-                                <th class='col3'> ".$data['phone']." </th>
-                                <th class='col4'> ".$data['email']." </th>
-                            </tr>
-                        </tbody>
-                    </table>";
-                
-                $renderer->doc .= $table;            // ptype = 'normal'
+                $renderer->doc .= "Hello World!";            // ptype = 'normal'
     //            $renderer->doc .= "<p>Hello World!</p>";     // ptype = 'block'
                 return true;
             }
