@@ -192,8 +192,30 @@
         * @see handle()
         */
         function render($mode, &$renderer, $data) {
+            
+            $table = "<table>
+                <thead>
+                    <tr class='row0'>
+                        <th class='col0'> Name </th>
+                        <th class='col1'> Address </th>
+                        <th class='col2'> Country </th>
+                        <th class='col3'> Phone number </th>
+                        <th class='col4'> Email address </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class='row1'>
+                        <th class='col0'> ".$data['name']." </th>
+                        <th class='col1'> ".$data['adress']." </th>
+                        <th class='col2'> ".$data['country']." </th>
+                        <th class='col3'> ".$data['phone']." </th>
+                        <th class='col4'> ".$data['email']." </th>
+                    </tr>
+                </tbody>
+            </table>";
+            
             if($mode == 'xhtml'){
-                $renderer->doc .= $data['name'].".".$data['address'];            // ptype = 'normal'
+                $renderer->doc .= $table;            // ptype = 'normal'
     //            $renderer->doc .= "<p>Hello World!</p>";     // ptype = 'block'
                 return true;
             }
