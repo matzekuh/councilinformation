@@ -1,0 +1,7 @@
+base   councilinformation
+author Matthias Jung
+email  matthias.jung@fmc.uni-karlsruhe.de
+date   2015-10-16
+name   Format council information as table
+desc   Format council information based on text input as table
+url    https://www.dokuwiki.org/plugin:example
