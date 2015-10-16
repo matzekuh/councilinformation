@@ -83,13 +83,13 @@
         * @see render()
         */
         function connectTo($mode) {
-    //      $this->Lexer->addSpecialPattern('<TEST>',$mode,'plugin_councilinformation');
-          $this->Lexer->addEntryPattern('<TEST>',$mode,'plugin_councilinformation');
+          $this->Lexer->addSpecialPattern('<council .*?>',$mode,'plugin_councilinformation');
+    //      $this->Lexer->addEntryPattern('<TEST>',$mode,'plugin_councilinformation');
         }
      
-        function postConnect() {
-          $this->Lexer->addExitPattern('</TEST>','plugin_councilinformation');
-        }
+    //    function postConnect() {
+    //      $this->Lexer->addExitPattern('</TEST>','plugin_councilinformation');
+    //    }
      
      
        /**
@@ -122,7 +122,7 @@
         * @static
         */
         function handle($match, $state, $pos, &$handler){
-            switch ($state) {
+        /**    switch ($state) {
               case DOKU_LEXER_ENTER : 
                 break;
               case DOKU_LEXER_MATCHED :
@@ -133,8 +133,13 @@
                 break;
               case DOKU_LEXER_SPECIAL :
                 break;
-            }
-            return array();
+            } */
+            
+            $match = substr($match,9,-1);
+            
+            preg_match_all("/(\w+?)=\"(.*?)\"/", $match, $regexMatches, PREG_SET_ORDER);
+            
+            return $regexMatches;
         }
      
        /**
@@ -158,7 +163,7 @@
         */
         function render($mode, &$renderer, $data) {
             if($mode == 'xhtml'){
-                $renderer->doc .= "Hello World!";            // ptype = 'normal'
+                $renderer->doc .= $data[1][1];            // ptype = 'normal'
     //            $renderer->doc .= "<p>Hello World!</p>";     // ptype = 'block'
                 return true;
             }
