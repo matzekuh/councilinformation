@@ -193,8 +193,8 @@
         */
         function render($mode, &$renderer, $data) {
             
-            $table = "<table>
-                <thead>
+            $table = "<div class='table sectionedit2'><table class='inline'>
+                <tbody>
                     <tr class='row0'>
                         <th class='col0'> Name </th>
                         <th class='col1'> Address </th>
@@ -202,17 +202,15 @@
                         <th class='col3'> Phone number </th>
                         <th class='col4'> Email address </th>
                     </tr>
-                </thead>
-                <tbody>
                     <tr class='row1'>
                         <th class='col0'> ".$data['name']." </th>
-                        <th class='col1'> ".$data['adress']." </th>
+                        <th class='col1'> ".$data['address']." </th>
                         <th class='col2'> ".$data['country']." </th>
                         <th class='col3'> ".$data['phone']." </th>
                         <th class='col4'> ".$data['email']." </th>
                     </tr>
                 </tbody>
-            </table>";
+            </table></div>";
             
             if($mode == 'xhtml'){
                 $renderer->doc .= $table;            // ptype = 'normal'
