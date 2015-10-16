@@ -16,7 +16,7 @@
      * All DokuWiki plugins to extend the parser/rendering mechanism
      * need to inherit from this class
      */
-    class syntax_plugin_test extends DokuWiki_Syntax_Plugin {
+    class syntax_plugin_councilinformation extends DokuWiki_Syntax_Plugin {
      
      
      
@@ -83,13 +83,13 @@
         * @see render()
         */
         function connectTo($mode) {
-          $this->Lexer->addSpecialPattern('<TEST>',$mode,'plugin_test');
-    //      $this->Lexer->addEntryPattern('<TEST>',$mode,'plugin_test');
+    //      $this->Lexer->addSpecialPattern('<TEST>',$mode,'plugin_councilinformation');
+          $this->Lexer->addEntryPattern('<TEST>',$mode,'plugin_councilinformation');
         }
      
-    //    function postConnect() {
-    //      $this->Lexer->addExitPattern('</TEST>','plugin_test');
-    //    }
+        function postConnect() {
+          $this->Lexer->addExitPattern('</TEST>','plugin_councilinformation');
+        }
      
      
        /**
