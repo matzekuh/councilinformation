@@ -139,7 +139,37 @@
             
             preg_match_all("/(\w+?)=\"(.*?)\"/", $match, $regexMatches, PREG_SET_ORDER);
             
-            return $regexMatches;
+            $params = array(
+                 'name'      => 'N.N.',
+                 'address'   => 'N.N.',
+                 'country'   => 'N.N.',
+                 'phone'     => 'N.N.',
+                 'email'     => 'N.N.'
+             );
+             
+             
+             for ($i = 0; $i < count($regexMatches); $i++) {
+                 $name  = strtoupper($regexMatches[$i][1]);
+                 $value = $regexMatches[$i][2];
+                 
+                 if(strcmp($name, "NAME")==0){
+                     $params['name'] = hsc(trim($value));
+                 } else
+                 if(strcmp($name, "ADDRESS")==0){
+                     $params['address'] = hsc(trim($value));
+                 } else
+                 if(strcmp($name, "COUNTRY")==0){
+                     $params['country'] = hsc(trim($value));
+                 } else
+                 if(strcmp($name, "PHONE")==0){
+                     $params['phone'] = hsc(trim($value));
+                 } else
+                 if(strcmp($name, "EMAIL")==0){
+                     $params['email'] = hsc(trim($value));
+                 }
+             }
+             
+             return $params;
         }
      
        /**
@@ -163,7 +193,7 @@
         */
         function render($mode, &$renderer, $data) {
             if($mode == 'xhtml'){
-                $renderer->doc .= $data[1][1];            // ptype = 'normal'
+                $renderer->doc .= $data['name'].".".$data['address'];            // ptype = 'normal'
     //            $renderer->doc .= "<p>Hello World!</p>";     // ptype = 'block'
                 return true;
             }
