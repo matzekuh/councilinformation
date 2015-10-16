@@ -83,13 +83,13 @@
         * @see render()
         */
         function connectTo($mode) {
-          $this->Lexer->addSpecialPattern('<council>.+?<\/council>',$mode,'plugin_councilinformation');
-    //      $this->Lexer->addEntryPattern('<council>',$mode,'plugin_councilinformation');
+    //      $this->Lexer->addSpecialPattern('<council>.+?</council>',$mode,'plugin_councilinformation');
+          $this->Lexer->addEntryPattern('<council>',$mode,'plugin_councilinformation');
         }
      
-    //    function postConnect() {
-    //      $this->Lexer->addExitPattern('</council>','plugin_councilinformation');
-    //    }
+        function postConnect() {
+          $this->Lexer->addExitPattern('</council>','plugin_councilinformation');
+        }
      
      
        /**
